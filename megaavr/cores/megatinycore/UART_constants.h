@@ -112,7 +112,11 @@
   #define PIN_SERIAL_XDIR           (3)
 
 /* Modifier Definitions  - these can be OR'ed with the other definition to turn on features like one-wire half duplex and more */
-#if !defined(USART_RS485_0_bm)
+#if !defined(USART_RS485_0_bm) && !defined(USART_RS4850_bm)
+  // Neither defined — fall back safely
+  #define USART_RS485_0_bm  (1<<3)
+  #define USART_RS485_1_bm  (1<<3)
+#elif !defined(USART_RS485_0_bm)
   #define USART_RS485_0_bm USART_RS4850_bm
   #if defined(USART_RS4851_bm)
     #define USART_RS485_1_bm USART_RS4851_bm
